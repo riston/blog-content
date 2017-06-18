@@ -4,6 +4,7 @@ draft = false
 title = "Automating your SVG export"
 description = "Easy way to automate your multi SVG object export"
 tags = [ "SVG", "Automation", "Export" ]
+thumbnail = "images/svg-export/lion-logo.png"
 +++
 
 Exporting could be a quite tedious manual work if you have to do it like 20+ times.
