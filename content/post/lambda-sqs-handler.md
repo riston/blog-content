@@ -4,6 +4,7 @@ draft = false
 title = "Handling SQS queue with AWS Lambda"
 description = "Basic example how to setup Simple Queue Service consumer based on AWS Lambda"
 tags = [ "SQS", "Lambda", "Serverless", "Apex" ]
+thumbnail = "images/sqs/aws-sqs-logo.png"
 +++
 
 Batch workers are one of the common patterns to separate more heavyweight data processing background jobs from the main application. That's all great, but to do this you usually need to create a separate server/instance/container job for this and do the maintenance. This could be easily changed by using serverless architecture, provided by Azure, Google, Amazon etc.
@@ -22,7 +23,7 @@ Deploying and managing the Lambdas is quite difficult and messy job, to make thi
 
 The queue consumer flow is split into separate module ~110LOC:
 
-```
+{{< highlight javascript >}}
 "use strict";
 
 const R        = require("ramda");
@@ -131,7 +132,7 @@ Queue.prototype.recursiveCall = function () {
 };
 
 module.exports = Queue;
-```
+{{< /highlight >}}
 
 The most interesting part is the `poll` function, here is the high-level view of the flow:
 
@@ -144,7 +145,7 @@ The most interesting part is the `poll` function, here is the high-level view of
 
 The Lambda function's code is quite small, mostly contains the settings and queue handling function.
 
-``` js
+{{< highlight javascript >}}
 const PromiseB = require("bluebird");
 const SQSQueue = require("./sqs-queue");
 
@@ -173,7 +174,7 @@ exports.handle = function (e, ctx, cb) {
             ctx.fail(err);
         });
 }
-```
+{{< /highlight >}}
 
 That's all amazing, but how do you stop the job if it's recursively calling the Lambda function again? Good question, currently there isn't such mechanism implemented. One possible solution would be to use special SQS message with a payload that could be identified and then stop next function call. Currently, you have to delete the Lambda function and redeploy when needed which isn't hard with Apex `apex deploy sqs-queue-handler` and `apex delete sqs-queue-handler`.
 

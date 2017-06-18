@@ -4,6 +4,7 @@ draft = false
 title = "Raspberry Pi surveillance camera with ML"
 description = "Combine simple hardware with some cleaver machine learning APIs"
 tags = [ "Machine learning", "Raspberry PI" ]
+thumbnail = "images/raspberry-pi-camera/pi-logo.png"
 +++
 
 {{% img src="/images/raspberry-pi-camera/camera.jpg" w="600" h="800" %}}
